@@ -11,7 +11,8 @@ class ProjectApiController extends Controller
 {
     public function index()
     {
-        $projects = Project::all();
+        // Recupero i progetti con i dati relativi al tipo e alla tecnologia
+        $projects = Project::with('type', 'technologies')->orderBy('id', 'desc')->paginate(6);
 
         return response() -> json([
             'success' => true,
