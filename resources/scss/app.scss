@@ -1,0 +1,67 @@
+// IMPORTO BOOTSTRAP
+@import '~bootstrap/scss/bootstrap';
+
+// IMPORTO IL FONT
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+// REGOLE CSS GENERALI
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+// BODY
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.my-card{
+    a{
+        text-decoration: none;
+    }
+}
+
+// BADGE TECHNOLOGIES 
+.my_badge{
+    padding: 1px 10px;
+    border-radius: 8px;
+}
+
+.html_badge_blue,
+.css_badge_red,
+.javascriptl_badge_yellow,
+.vuejs_badge_green,
+.php_badge_violet,
+.laravel_badge_brown,
+.phyton_badge_orange {
+    color: white;
+}
+
+.html_badge_blue{
+    background-color: rgb(0, 0, 127);
+}
+
+.css_badge_red{
+    background-color: rgb(181, 0, 0);
+}
+
+.javascriptl_badge_yellow {
+    background-color: rgb(164, 158, 0);
+}
+
+.vuejs_badge_green {
+    background-color: rgb(0, 127, 15);
+}
+
+.php_badge_violet {
+    background-color: rgb(70, 0, 127);
+}
+
+.laravel_badge_brown {
+    background-color: rgb(81, 42, 42);
+}
+
+.phyton_badge_orange {
+    background-color: rgb(127, 57, 0);
+}
