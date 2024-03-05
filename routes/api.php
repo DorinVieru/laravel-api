@@ -16,6 +16,8 @@ use App\Http\Controllers\Api\ProjectApiController;
 */
 
 Route::get('/projects', [ProjectApiController::class, 'index']);
+Route::get('/projects/{slug}', [ProjectApiController::class, 'show']);
+
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
