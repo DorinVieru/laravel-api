@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ProjectApiController;
+use App\Http\Controllers\Api\TypeApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +17,7 @@ use App\Http\Controllers\Api\ProjectApiController;
 */
 
 Route::get('/projects', [ProjectApiController::class, 'index']);
+Route::get('/projects/type/{slug}', [ProjectApiController::class, 'projects_type']);
 Route::get('/projects/{slug}', [ProjectApiController::class, 'show']);
 
 
