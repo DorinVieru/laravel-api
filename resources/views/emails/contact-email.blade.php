@@ -1,4 +1,5 @@
-<h1 style="color: green">Ciao Dorin</h1>
+<h1 style="color: green">Nuovo contatto da Boolfolio</h1>
+<h3>Ciao Dorin</h3>
 <p>
     Hai ricevuto una nuova mail, di seguito i dati: <br>
     Nome: {{ $lead->name }} <br>
