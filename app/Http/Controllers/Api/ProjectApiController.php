@@ -46,7 +46,7 @@ class ProjectApiController extends Controller
             ->join('types', 'types.id', '=', 'projects.type_id')
             ->select('projects.*', 'types.slug as typeSlug')
             ->where('types.slug', $slug)
-            ->get();
+            ->paginate(3);
         
         return response()->json([
             'success' => true,

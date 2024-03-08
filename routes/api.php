@@ -17,8 +17,10 @@ use App\Http\Controllers\Api\TypeApiController;
 */
 
 Route::get('/projects', [ProjectApiController::class, 'index']);
-Route::get('/projects/type/{slug}', [ProjectApiController::class, 'projects_type']);
 Route::get('/projects/{slug}', [ProjectApiController::class, 'show']);
+Route::get('/projects/type/{slug}', [ProjectApiController::class, 'projects_types']);
+
+Route::get('/types', [TypeApiController::class, 'index']);
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
