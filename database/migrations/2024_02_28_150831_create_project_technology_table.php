@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('project_technology', function (Blueprint $table) {
             $table->unsignedBigInteger('project_id');
-            $table->foreign('project_id')->references('id')->on('projects')->cascadeOnDelete('set null');
+            $table->foreign('project_id')->references('id')->on('projects')->cascadeOnDelete();
 
-            $table->unsignedInteger('technology_id');
-            $table->foreign('technology_id')->references('id')->on('technologies')->cascadeOnDelete('set null');
+            $table->unsignedBigInteger('technology_id');
+            $table->foreign('technology_id')->references('id')->on('technologies')->cascadeOnDelete();
         });
     }
 
