@@ -34,7 +34,7 @@ class NewContact extends Mailable
     {
         return new Envelope(
             subject: 'Nuova email da Boolfolio',
-            replyTo: $this->lead->address,
+            replyTo: $this->lead->mail,
         );
     }
 

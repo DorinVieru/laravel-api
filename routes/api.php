@@ -17,6 +17,10 @@ use App\Http\Controllers\Api\LeadApiController;
 |
 */
 
+// Route::get('/progetti', function () {
+//     return 'welcome';
+// });
+
 Route::get('/projects', [ProjectApiController::class, 'index']);
 Route::get('/projects/{slug}', [ProjectApiController::class, 'show']);
 Route::get('/projects/type/{slug}', [ProjectApiController::class, 'projects_types']);
