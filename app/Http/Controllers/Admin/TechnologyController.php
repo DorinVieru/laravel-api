@@ -28,9 +28,32 @@ class TechnologyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        return view('admin.technologies.create');
+        // ARRAY PER ASSEGANRE I COLORI AL BADGE NELLA CREAZIONE
+        $badge_color = [
+            ['name' => 'Arancione', 'badge_class' => 'arancione'],
+            ['name' => 'Nero', 'badge_class' => 'nero'],
+            ['name' => 'Azzurro', 'badge_class' => 'azzurro'],
+            ['name' => 'Grigio', 'badge_class' => 'grigio'],
+            ['name' => 'Rosa', 'badge_class' => 'rosa'],
+            ['name' => 'Blu', 'badge_class' => 'html_badge_blue'],
+            ['name' => 'Rosso', 'badge_class' => 'css_badge_red'],
+            ['name' => 'Giallo', 'badge_class' => 'javascriptl_badge_yellow'],
+            ['name' => 'Verde', 'badge_class' => 'vuejs_badge_green'],
+            ['name' => 'Viola', 'badge_class' => 'php_badge_violet'],
+            ['name' => 'Marrone', 'badge_class' => 'laravel_badge_brown'],
+            ['name' => 'Color Mattone', 'badge_class' => 'phyton_badge_orange'],
+        ];
+
+        // Genero una condizione per mostrarmi nell'edit e nel create un messaggio di errore personalizzato per la duplicazione di un titolo
+        $error_message = '';
+        if (!empty($request->all())) {
+            $messages = $request->all();
+            $error_message = $messages['error_message'];
+        }
+
+        return view('admin.technologies.create', compact('badge_color', 'error_message'));
     }
 
     /**
@@ -39,9 +62,24 @@ class TechnologyController extends Controller
      * @param  \App\Http\Requests\StoreTechnologyRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreTechnologyRequest $request)
+    public function store(StoreTechnologyRequest $request, Technology $technology)
     {
         $form_projects = $request->all();
+
+        // QUERY PER IL CONTROLLO NELLA DUPLICAZIONE DEL BADGE
+        $exists_badge = Technology::where('badge_class', 'LIKE', $form_projects['badge_class'])->where('id', '!=', $technology->id)->get();
+        if (count($exists_badge) > 0) {
+            $error_message = 'Hai inserito un badge di una tecnologia di progetto già presente nel database.';
+            return redirect()->route('admin.technologies.create', compact('technology', 'error_message'));
+        }
+
+        // Creare una query per la modifica di una tecnologia di progetto con lo stesso nome
+        $exists = Technology::where('name', 'LIKE', $form_projects['name'])->where('id', '!=', $technology->id)->get();
+        // Condizione che mi permette di modificare una tecnologia di progetto mantenendo lo stesso nome. Ma se cambio nome e ne inserisco uno già presente in un altro progetto, mi mostra l'errore impostato.
+        if (count($exists) > 0) {
+            $error_message = 'Hai inserito un nome di una tecnologia di progetto già presente nel database.';
+            return redirect()->route('admin.technologies.create', compact('technology', 'error_message'));
+        }
 
         // CREO LA NUOVA ISTANZA PER TECHNOLOGY PER SALVARLO NEL DATABASE
         $technology = new Technology();
@@ -77,6 +115,22 @@ class TechnologyController extends Controller
      */
     public function edit(Technology $technology, Request $request)
     {
+        // ARRAY PER ASSEGANRE I COLORI AL BADGE NELLA MODIFICA
+        $badge_color = [
+            ['name' => 'Arancione', 'badge_class' => 'arancione'],
+            ['name' => 'Nero', 'badge_class' => 'nero'],
+            ['name' => 'Azzurro', 'badge_class' => 'azzurro'],
+            ['name' => 'Grigio', 'badge_class' => 'grigio'],
+            ['name' => 'Rosa', 'badge_class' => 'rosa'],
+            ['name' => 'Blu', 'badge_class' => 'html_badge_blue'],
+            ['name' => 'Rosso', 'badge_class' => 'css_badge_red'],
+            ['name' => 'Giallo', 'badge_class' => 'javascriptl_badge_yellow'],
+            ['name' => 'Verde', 'badge_class' => 'vuejs_badge_green'],
+            ['name' => 'Viola', 'badge_class' => 'php_badge_violet'],
+            ['name' => 'Marrone', 'badge_class' => 'laravel_badge_brown'],
+            ['name' => 'Color Mattone', 'badge_class' => 'phyton_badge_orange'],
+        ];
+        
         // Genero una condizione per mostrarmi nell'edit e nel create un messaggio di errore personalizzato per la duplicazione di un titolo
         $error_message = '';
         if (!empty($request->all())) {
@@ -84,7 +138,7 @@ class TechnologyController extends Controller
             $error_message = $messages['error_message'];
         }
 
-        return view('admin.technologies.edit', compact('technology', 'error_message'));
+        return view('admin.technologies.edit', compact('technology', 'error_message', 'badge_color'));
     }
 
     /**
@@ -98,11 +152,18 @@ class TechnologyController extends Controller
     {
         $form_projects = $request->all();
 
+        // QUERY PER IL CONTROLLO NELLA DUPLICAZIONE DEL BADGE
+        $exists_badge = Technology::where('badge_class', 'LIKE', $form_projects['badge_class'])->where('id', '!=', $technology->id)->get();
+        if (count($exists_badge) > 0) {
+            $error_message = 'Hai inserito un badge di una tecnologia di progetto già presente nel database.';
+            return redirect()->route('admin.technologies.edit', compact('technology', 'error_message'));
+        }
+
         // Creare una query per la modifica di una tecnologia di progetto con lo stesso nome
         $exists = Technology::where('name', 'LIKE', $form_projects['name'])->where('id', '!=', $technology->id)->get();
         // Condizione che mi permette di modificare una tecnologia di progetto mantenendo lo stesso nome. Ma se cambio nome e ne inserisco uno già presente in un altro progetto, mi mostra l'errore impostato.
         if (count($exists) > 0) {
-            $error_message = 'Hai inserito un nome di una tecnoligia di progetto già presente nel database.';
+            $error_message = 'Hai inserito un nome di una tecnologia di progetto già presente nel database.';
             return redirect()->route('admin.technologies.edit', compact('technology', 'error_message'));
         }
 

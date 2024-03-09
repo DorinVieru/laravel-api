@@ -28,12 +28,19 @@ class TypeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         // RECUPERO I TIPI DI PROGETTO PER POTERLI CICLARE NELLA SELECT
         $types = Type::all();
 
-        return view('admin.types.create', compact('types'));
+        // Genero una condizione per mostrarmi nell'edit e nel create un messaggio di errore personalizzato per la duplicazione di un titolo
+        $error_message = '';
+        if (!empty($request->all())) {
+            $messages = $request->all();
+            $error_message = $messages['error_message'];
+        }
+
+        return view('admin.types.create', compact('types', 'error_message'));
     }
 
     /**
@@ -42,9 +49,17 @@ class TypeController extends Controller
      * @param  \App\Http\Requests\StoreTypeRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreTypeRequest $request)
+    public function store(StoreTypeRequest $request, Type $type)
     {
         $form_projects = $request->all();
+
+        // Creare una query per la modifica di un tipo di progetto con lo stesso nome
+        $exists = Type::where('name', 'LIKE', $form_projects['name'])->where('id', '!=', $type->id)->get();
+        // Condizione che mi permette di modificare un tipo di progetto mantenendo lo stesso nome. Ma se cambio nome e ne inserisco uno già presente in un altro progetto, mi mostra l'errore impostato.
+        if (count($exists) > 0) {
+            $error_message = 'Hai inserito un nome di un tipo di progetto già presente in un altro tipo di progetto.';
+            return redirect()->route('admin.types.create', compact('type', 'error_message'));
+        }
 
         // CREO LA NUOVA ISTANZA PER TYPE PER SALVARLO NEL DATABASE
         $type = new Type();

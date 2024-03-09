@@ -16,6 +16,12 @@
                     </ul>
                 </div>
              @endif
+             {{-- Condizione per l'errore della duplicazione del titolo --}}
+             @if ($error_message != '')
+                <div class="alert alert-danger">
+                    {{ $error_message }}
+                </div> 
+             @endif
             <form action="{{ route('admin.types.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 

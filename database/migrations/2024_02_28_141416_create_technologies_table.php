@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('technologies', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 50)->unique();
+            $table->string('name', 50);
             $table->string('badge_class', 40);
             $table->string('slug', 70);
             $table->timestamps();

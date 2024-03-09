@@ -16,6 +16,12 @@
                     </ul>
                 </div>
              @endif
+             {{-- Condizione per l'errore della duplicazione del titolo --}}
+             @if ($error_message != '')
+                <div class="alert alert-danger">
+                    {{ $error_message }}
+                </div> 
+             @endif
             <form action="{{ route('admin.projects.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
@@ -24,6 +30,7 @@
                     @error ('title')
                         <div class="text-danger fw-semibold">{{ $message }}</div>
                     @enderror
+                        <div class="text-danger fw-semibold">{{ $error_message }}</div>
                 </div>
                     <div class="mb-3">
                     <textarea name="description" class="form-control @error ('description') is-invalid @enderror" id="description" rows="5" placeholder="Descrizione" required>{{ old('description') }}</textarea>

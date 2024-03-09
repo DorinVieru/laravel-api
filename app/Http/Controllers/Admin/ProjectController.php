@@ -32,15 +32,22 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         // RECUPERO I TIPI DI PROGETTO PER POTERLI CICLARE NELLA SELECT
         $types = Type::all();
 
         // RECUPERO LE TECNOLOGIE PER PROGETTO PER POTERLI CICLARE NELLA CHECKBOX
         $technologies = Technology::all();
+
+        // Genero una condizione per mostrarmi nell'edit e nel create un messaggio di errore personalizzato per la duplicazione di un titolo
+        $error_message = '';
+        if (!empty($request->all())) {
+            $messages = $request->all();
+            $error_message = $messages['error_message'];
+        }
         
-        return view('admin.projects.create', compact('types', 'technologies'));
+        return view('admin.projects.create', compact('types', 'technologies', 'error_message'));
     }
 
     /**
@@ -49,9 +56,17 @@ class ProjectController extends Controller
      * @param  \App\Http\Requests\StoreProjectRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreProjectRequest $request)
+    public function store(StoreProjectRequest $request, Project $project)
     {
         $form_projects = $request->all();
+
+        // Creare una query per la modifica di un progetto con lo stesso titolo
+        $exists = Project::where('title', 'LIKE', $form_projects['title'])->where('id', '!=', $project->id)->get();
+        // Condizione che mi permette di modificare un progetto mantenendo lo stesso titolo. Ma se cambio titolo e ne inserisco uno già presente in un altro progetto, mi mostra l'errore impostato.
+        if (count($exists) > 0) {
+            $error_message = 'Hai inserito un titolo già presente in un altro progetto.';
+            return redirect()->route('admin.projects.create', compact('project', 'error_message'));
+        }
 
         // CREO LA NUOVA ISTANZA PER PROJECT PER SALVARLO NEL DATABASE
         $project = new Project();

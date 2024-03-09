@@ -109,7 +109,12 @@ body {
 .vuejs_badge_green,
 .php_badge_violet,
 .laravel_badge_brown,
-.phyton_badge_orange {
+.phyton_badge_orange,
+.arancione,
+.nero,
+.azzurro,
+.grigio,
+.rosa {
     color: white;
 }
 
@@ -141,13 +146,28 @@ body {
     background-color: rgb(127, 57, 0);
 }
 
-a{
-    text-decoration: none;
-    color: #00c1d4;
+.phyton_badge_orange {
+    background-color: rgb(127, 57, 0);
+}
 
-    &:hover{
-        color: #00152D;
-    }
+.arancione {
+    background-color: #FF8000;
+}
+
+.nero{
+    background-color: black;
+}
+
+.azzurro {
+    background-color: #007fff;
+}
+
+.grigio {
+    background-color: rgb(74, 74, 74);
+}
+
+.rosa {
+    background-color: #b4828a;
 }
 
 // MAIN
@@ -158,6 +178,15 @@ a{
     height: inherit;
     z-index: -1;
     overflow-y: auto;
+}
+
+a{
+    text-decoration: none;
+    color: #00c1d4;
+
+    &:hover{
+        color: #00152D;
+    }
 }
 
 // BOOTSTRAP CLASS CHANGE

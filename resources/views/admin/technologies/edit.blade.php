@@ -35,6 +35,18 @@
                         <div class="text-danger fw-semibold">{{ $message }}</div>
                     @enderror
                 </div>
+                <div class="mb-3">
+                    <label for="badge_class" class="control-label">Seleziona il colore del badge</label>
+                    <select name="badge_class" id="badge_class" class="form-select @error ('badge_class') is-invalid @enderror">
+                        <option value="">Seleziona il colore del badge</option>
+                        @foreach ($badge_color as $badge)
+                            <option value="{{ $badge['badge_class'] }}" @selected($badge['badge_class'] == old('badge_class', $technology->badge_class ? $technology->badge_class : ''))>{{ $badge['name'] }}</option>
+                        @endforeach
+                    </select>
+                    @error ('badge_class')
+                        <div class="text-danger fw-semibold">{{ $message }}</div>
+                    @enderror
+                </div>
                 <div class="d-flex justify-content-center mb-5">
                     <button type="submit" class="btn btn-warning px-5 fs-4">Modifica ora la tecnologia</button>
                 </div>
