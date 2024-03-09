@@ -4,12 +4,12 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-12 text-center">
-                <h1 class="fw-bold text-capitalize color-title">{{ $type->name }}</h1>
-                <p class="fs-6">Slug: {{ $type->slug }}</p>
+                <h1 class="fw-bold text-capitalize color-title">{{ $technology->name }}</h1>
+                <p class="fs-6">Slug: {{ $technology->slug }}</p>
             </div>
             <div class="col-12 mt-5">
                 <div class="row">
-                        @forelse ($type->projects as $project)
+                        @forelse ($technology->projects as $project)
                         <div class="col-4 mb-3">
                             <div class="card" style="width: 22rem;">
                                 <img src="{{ $project->cover_image ? asset('/storage/' . $project->cover_image) : asset('/img/another-image.jpg') }}" alt="" class="card-img-top">
@@ -23,32 +23,32 @@
                         </div>
                         @empty
                         <div class="col-12">
-                            <h3>Non ci sono progetti per il tipo che stai cercando.</h3>
+                            <h3>Non ci sono progetti per la tecnologia che stai cercando.</h3>
                         </div>
                         @endforelse
                 </div>
             </div>
             <div class="d-flex mt-2 mb-5">
                 {{-- DELETE BUTTON --}}
-                {{-- <form action="{{ route('admin.types.destroy', ['type' => $type->id]) }}" method="POST" onsubmit="return confirm('Sei sicuro di voler cancellare {{ $type->name }}?')">
+                {{-- <form action="{{ route('admin.technologies.destroy', ['tech' => $tech->id]) }}" method="POST" onsubmit="return confirm('Sei sicuro di voler cancellare {{ $tech->name }}?')">
                 @csrf
                 @method('DELETE')
-                    <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i> Cancella il progetto</button>
+                    <button tech="submit" class="btn btn-danger"><i class="fas fa-trash"></i> Cancella il progetto</button>
                 </form> --}}
 
             </div>
             <div class="col-12 text-center mt-1 mb-5">
                 {{-- EDIT BUTTON --}}
-                <a href="{{ route('admin.types.edit', ['type' => $type['id']]) }}">
+                <a href="{{ route('admin.technologies.edit', ['technology' => $technology['id']]) }}">
                     <button type="button" class="btn btn-warning text-decoration-none"><i class="fas fa-edit"></i> Modifica il progetto</button>
                 </a>
                 {{-- MODALE --}}
-                <button class="btn btn-danger mx-2" data-bs-toggle="modal" data-bs-target="#modal_type_delete-{{ $type->id }}"><i class="fas fa-trash"></i> Cancella la tipologia di progetto</button>
+                <button class="btn btn-danger mx-2" data-bs-toggle="modal" data-bs-target="#modal_tech_delete-{{ $technology->id }}"><i class="fas fa-trash"></i> Cancella la tipologia di progetto</button>
                  {{--TORNA INDIETRO  --}}
-                <a href="/admin/types" > <button class="btn btn-info text-decoration-none"><i class="fa-solid fa-door-open"></i> Torna indietro</button></a>
+                <a href="/admin/technologies" > <button class="btn btn-info text-decoration-none"><i class="fa-solid fa-door-open"></i> Torna indietro</button></a>
             </div>
         </div>
 </div>
 {{-- POP-UP MODALE --}}
-@include('admin.types.modal_delete')
+@include('admin.technologies.modal_delete')
 @endsection

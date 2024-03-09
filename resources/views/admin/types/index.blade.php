@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-12 d-flex justify-content-center align-items-center">
-            <h1 class="fw-bold">Tutti i Tipi di Progetti</h1>
+            <h1 class="fw-bold color-title">Tutti i Tipi di Progetti</h1>
             <a href="{{ route('admin.types.create') }}" > <button class="btn btn-success ms-5">Aggiungi un nuovo tipo di progetto</button></a>
             
         </div>
@@ -29,7 +29,7 @@
                             <td>
                                 <div class="d-flex">
                                     {{-- VIEW BUTTON --}}
-                                    <a href="{{ route('admin.types.show', ['type' => $type->id]) }}" class="btn btn-sm square btn-primary" title="Visualizza i progetti per questo tipo"><i class="fas fa-eye"></i></a>
+                                    <a href="{{ route('admin.types.show', ['type' => $type->id]) }}" class="btn btn-sm square btn-info" title="Visualizza i progetti per questo tipo"><i class="fas fa-eye"></i></a>
                                     {{-- EDIT BUTTON --}}
                                     <a href="{{ route('admin.types.edit', ['type' => $type->id]) }}" class="btn btn-sm square btn-warning mx-2"><i class="fas fa-edit"></i></a>
                                     {{-- DELETE BUTTON --}}

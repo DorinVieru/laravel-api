@@ -1,5 +1,5 @@
 <div class="modal fade" id="modal_type_delete-{{ $type->id }}" tabindex="-1" aria-labelledby="modal_type_delete" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5 fw-bold" id="modal_type_delete_label">Conferma cancellazione il tipo numero {{ $type->id }}</h1>

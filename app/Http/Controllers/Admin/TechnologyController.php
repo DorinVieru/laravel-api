@@ -6,6 +6,8 @@ use App\Models\Technology;
 use App\Http\Requests\StoreTechnologyRequest;
 use App\Http\Requests\UpdateTechnologyRequest;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class TechnologyController extends Controller
 {
@@ -16,7 +18,9 @@ class TechnologyController extends Controller
      */
     public function index()
     {
-        //
+        $technologies = Technology::orderByDesc('id')->get();
+
+        return view('admin.technologies.index', compact('technologies'));
     }
 
     /**
@@ -26,7 +30,7 @@ class TechnologyController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.technologies.create');
     }
 
     /**
@@ -37,7 +41,21 @@ class TechnologyController extends Controller
      */
     public function store(StoreTechnologyRequest $request)
     {
-        //
+        $form_projects = $request->all();
+
+        // CREO LA NUOVA ISTANZA PER TECHNOLOGY PER SALVARLO NEL DATABASE
+        $technology = new Technology();
+
+        // LO SLUG LO RECUPERO IN UN SECONDO MOMENTO, IN QUANTO NON LO PASSO NEL FORM
+        $form_projects['slug'] = Str::slug($form_projects['name'], '-');
+        // RECUPERO I DATI TRAMITE IL FILL
+        $technology->fill($form_projects);
+
+        // SALVO I DATI
+        $technology->save();
+
+        // FACCIO IL REDIRECT ALLA PAGINA SHOW 
+        return redirect()->route('admin.technologies.show', ['technology' => $technology]);
     }
 
     /**
@@ -48,7 +66,7 @@ class TechnologyController extends Controller
      */
     public function show(Technology $technology)
     {
-        //
+        return view('admin.technologies.show', compact('technology'));
     }
 
     /**
@@ -57,9 +75,16 @@ class TechnologyController extends Controller
      * @param  \App\Models\Technology  $technology
      * @return \Illuminate\Http\Response
      */
-    public function edit(Technology $technology)
+    public function edit(Technology $technology, Request $request)
     {
-        //
+        // Genero una condizione per mostrarmi nell'edit e nel create un messaggio di errore personalizzato per la duplicazione di un titolo
+        $error_message = '';
+        if (!empty($request->all())) {
+            $messages = $request->all();
+            $error_message = $messages['error_message'];
+        }
+
+        return view('admin.technologies.edit', compact('technology', 'error_message'));
     }
 
     /**
@@ -71,7 +96,24 @@ class TechnologyController extends Controller
      */
     public function update(UpdateTechnologyRequest $request, Technology $technology)
     {
-        //
+        $form_projects = $request->all();
+
+        // Creare una query per la modifica di una tecnologia di progetto con lo stesso nome
+        $exists = Technology::where('name', 'LIKE', $form_projects['name'])->where('id', '!=', $technology->id)->get();
+        // Condizione che mi permette di modificare una tecnologia di progetto mantenendo lo stesso nome. Ma se cambio nome e ne inserisco uno già presente in un altro progetto, mi mostra l'errore impostato.
+        if (count($exists) > 0) {
+            $error_message = 'Hai inserito un nome di una tecnoligia di progetto già presente nel database.';
+            return redirect()->route('admin.technologies.edit', compact('technology', 'error_message'));
+        }
+
+        // LO SLUG LO RECUPERO IN UN SECONDO MOMENTO, IN QUANTO NON LO PASSO NEL FORM
+        $form_projects['slug'] = Str::slug($form_projects['name'], '-');
+
+        // SALVO I DATI
+        $technology->update($form_projects);
+
+        // FACCIO IL REDIRECT ALLA PAGINA SHOW 
+        return redirect()->route('admin.technologies.index');
     }
 
     /**
@@ -82,6 +124,8 @@ class TechnologyController extends Controller
      */
     public function destroy(Technology $technology)
     {
-        //
+        $technology->delete();
+
+        return redirect()->route('admin.technologies.index');
     }
 }

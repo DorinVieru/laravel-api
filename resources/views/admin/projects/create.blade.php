@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-12 d-flex justify-content-center align-items-center">
-            <h1 class="fw-bold">Aggiungi un nuovo progetto!</h1>  
+            <h1 class="fw-bold color-title">Aggiungi un nuovo progetto!</h1>  
         </div>
         <div class="col-10 mt-5">
              @if ($errors->any())
@@ -66,12 +66,12 @@
                     @enderror
                 </div>
                 <div class="d-flex justify-content-center mt-4 mb-5">
-                    <button type="submit" class="btn btn-primary px-5 fs-4">Crea il tuo Progetto!</button>
+                    <button type="submit" class="btn btn-success px-5 fs-4">Crea il tuo Progetto!</button>
                 </div>
             </form>
         </div>
         <div class="col-10 text-center mt-5">
-            <a href="/admin/projects" > <button class="btn btn-success">Torna indietro</button></a>
+            <a href="/admin/projects" > <button class="btn btn-info">Torna indietro</button></a>
         </div>
     </div>
 </div>

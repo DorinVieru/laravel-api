@@ -26,28 +26,42 @@
         @include('partials.header')
 
         {{-- SIDEBAR --}}
-        <div class="container-fluid vh-100">
-            <div class="row h-100">
-                <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-dark navbar-dark sidebar collapse">
+        <div class="container-fluid">
+            <div class="row">
+                <nav id="sidebarMenu" class="col-md-3 col-lg-2 bg-blue navbar-dark d-flex flex-column justify-content-between lateral-sidebar">
                     <div class="position-sticky pt-3">
+                        <ul class="nav flex-column pt-5">
+                            <li class="nav-item">
+                                <a href="{{ route('admin.dashboard') }}" class="nav-link text-white {{ Route::currentRouteName() == 'admin.dashboard' ? 'bg-violet rounded-2' : '' }}"><i class="fa-solid fa-tachometer-alt"></i> Dashboard</a>
+                            </li>
+                            <li class="nav-item my-2">
+                                <a href="{{ route('admin.projects.index') }}" class="nav-link text-white {{ Route::currentRouteName() == 'admin.projects.index' ? 'bg-violet rounded-2' : '' }}"><i class="fa-solid fa-newspaper"></i> Projects</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('admin.types.index') }}" class="nav-link text-white {{ Route::currentRouteName() == 'admin.types.index' ? 'bg-violet rounded-2' : '' }}"><i class="fa-solid fa-folder"></i> Types</a>
+                            </li>
+                            <li class="nav-item my-2">
+                                <a href="{{ route('admin.technologies.index') }}" class="nav-link text-white tech {{ Route::currentRouteName() == 'admin.technologies.index' ? 'bg-violet rounded-2' : '' }}"><i class="fa-solid fa-microchip fs-5"></i> Technologies</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="pb-3">
                         <ul class="nav flex-column">
                             <li class="nav-item">
-                                {{ Route::currentRouteName() }}
-                                <a href="{{ route('admin.dashboard') }}" class="nav-link text-white {{ Route::currentRouteName() == 'admin.dashboard' ? 'bg-secondary rounded-2' : '' }}"><i class="fa-solid fa-tachometer-alt"></i> Dashboard</a>
+                                <a href="#" class="nav-link nav-bottom text-white"><i class="fa-solid fa-headset"></i> Support</a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('admin.projects.index') }}" class="nav-link text-white {{ Route::currentRouteName() == 'admin.projects.index' ? 'bg-secondary rounded-2' : '' }}"><i class="fa-solid fa-newspaper"></i> Projects</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ route('admin.types.index') }}" class="nav-link text-white {{ Route::currentRouteName() == 'admin.types.index' ? 'bg-secondary rounded-2' : '' }}"> <i class="fa-solid fa-folder"></i> Types</a>
+                                <a href="http://127.0.0.1:8000/profile" class="nav-link nav-bottom text-white"><i class="fa-solid fa-gear"></i> Settings</a>
                             </li>
                         </ul>
                     </div>
                 </nav>
-                {{-- MAIN --}}
-                <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 pt-3">
-                    @yield('content')
-                </main>
+                {{-- MAIN --}}+
+                <div id="content">
+                    <main class="col-md-9 ms-sm-auto col-lg-10 pt-3">
+                        @yield('content')
+                    </main>
+                </div>
             </div>
         </div>
     </div>

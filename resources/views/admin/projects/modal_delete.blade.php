@@ -1,5 +1,5 @@
 <div class="modal fade" id="modal_project_delete-{{ $project->id }}" tabindex="-1" aria-labelledby="modal_project_delete" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5 fw-bold" id="modal_project_delete_label">Conferma cancellazione per progetto numero {{ $project->id }}</h1>

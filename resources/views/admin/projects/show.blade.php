@@ -8,7 +8,7 @@
                 <div class="card my-card" style="width: 44rem;">
                     <img src="{{ $project->cover_image != null ?  asset('/storage/' . $project->cover_image) : asset('/img/another-image.jpg') }}" alt="{{ $project->title }}" class="card-img-top">
                     <div class="card-body">
-                        <h5 class="card-title text-capitalize">{{ $project->title}}</h5>
+                        <h5 class="card-title text-capitalize fw-bold color-title">{{ $project->title}}</h5>
                         <p class="card-text">{{ $project->description }}</p>
                     </div>
                         <ul class="list-group list-group-flush">
@@ -26,7 +26,7 @@
                             </li>
                         </ul>
                     <div class="card-body">
-                        <a href="{{ $project->cover_image !== null ? asset('/storage/' . $project->cover_image) : asset('/img/another-image.jpg') }}" target="_blank" class="btn btn-primary"><i class="fa-solid fa-download"></i> Scarica l'immagine</a>
+                        <a href="{{ $project->cover_image !== null ? asset('/storage/' . $project->cover_image) : asset('/img/another-image.jpg') }}" target="_blank" class="btn btn-success"><i class="fa-solid fa-download"></i> Scarica l'immagine</a>
                         {{-- EDIT BUTTON --}}
                         <a href="{{ route('admin.projects.edit', ['project' => $project['id']]) }}">
                             <button type="button" class="btn btn-warning mx-2"><i class="fas fa-edit"></i> Modifica il progetto</button>
@@ -43,7 +43,7 @@
                 </div>
             </div>
             <div class="col-12 text-center mt-5">
-                <a href="/admin/projects" > <button class="btn btn-secondary ms-5"><i class="fa-solid fa-door-open"></i> Torna indietro</button></a>
+                <a href="/admin/projects" > <button class="btn btn-info ms-5"><i class="fa-solid fa-door-open"></i> Torna indietro</button></a>
             </div>
         </div>
 </div>

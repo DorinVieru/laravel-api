@@ -16,10 +16,85 @@ body {
     font-family: 'Montserrat', sans-serif;
 }
 
+.color-title{
+    color: #00152D;
+}
+
+// HEADER
+.header-nav{
+    z-index: 2;
+
+    a{
+        color: white;
+    }
+}
+
+.bg-blue{
+    background-color: #00152D;
+}
+
+.bg-azzurro {
+    background-color: #00c1d4;
+}
+
+.nav-header{
+    text-decoration: none;
+    color: white;
+    transition: 0.2s;
+    border-bottom: 3px solid transparent;
+
+    &.active,
+    &:hover {
+        color: #00c1d4;
+        font-weight: 900;
+        transform: scale(1.2);
+    }
+}
+
+// SIDEBAR
+.nav-link{
+    transition: 0.5s;
+
+    &:hover {
+        background-color: #6C63FF;
+        border-radius: 7px;
+    }
+}
+
+.nav-bottom{
+    background-color: #6C63FF;
+    border-radius: 13px;
+    margin: 5px 0;
+    transition: 0.4s;
+
+    &:hover{
+        transform: scale(1.1);
+    }
+}
+
+.bg-violet{
+    background-color: #6C63FF;
+}
+
+.tech{
+    padding-left: 13px;
+}
+
 .my-card{
     a{
         text-decoration: none;
     }
+}
+
+.lateral-sidebar{
+    height: 100vh;
+    width: 200px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    overflow-y: hidden;
+    padding-top: 45px;
 }
 
 // BADGE TECHNOLOGIES 
@@ -66,3 +141,42 @@ body {
     background-color: rgb(127, 57, 0);
 }
 
+a{
+    text-decoration: none;
+    color: #00c1d4;
+
+    &:hover{
+        color: #00152D;
+    }
+}
+
+// MAIN
+#content{
+    position: absolute;
+    bottom: 0;
+    top: 100px;
+    height: inherit;
+    z-index: -1;
+    overflow-y: auto;
+}
+
+// BOOTSTRAP CLASS CHANGE
+.table-dark{
+    --bs-table-bg: #00c1d4 !important;
+    --bs-table-border-color: #00c1d4 !important;
+}
+
+.btn-success{
+    --bs-btn-bg: #6C63FF;
+    --bs-btn-border-color: #6C63FF;
+    --bs-btn-hover-bg: #514cc0;
+    --bs-btn-hover-border-color: #514cc0;
+    --bs-btn-active-bg: #514cc0;
+    --bs-btn-active-border-color: #514cc0;
+    --bs-btn-disabled-bg: #6C63FF;
+    --bs-btn-disabled-border-color: #6C63FF;
+}
+
+.modal-backdrop{
+    width: 0;
+}

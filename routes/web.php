@@ -3,8 +3,8 @@
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\TypeController;
+use App\Http\Controllers\Admin\TechnologyController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\TechnologyController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,15 +22,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
-
 Route::middleware(['auth', 'verified'])->name('admin.')->prefix('admin')->group(function(){
     // ROTTA PER LA DASHBOARD IN CUI ATTERRA L'UTENTE DOPO AVER EFF. LOGIN
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    // Rotta per tutti i progetti
     Route::resource('/projects', ProjectController::class);
+    // Rotta per tutti i tipi di progetti
     Route::resource('/types', TypeController::class);
+    // Rotta per tutte le tecnologie dei progetti
+    Route::resource('/technologies', TechnologyController::class);
 });
 
 Route::middleware('auth')->group(function () {

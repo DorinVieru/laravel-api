@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-12 d-flex justify-content-center align-items-center">
-            <h1 class="fw-bold">Modifica il progetto {{ $project->id }}</h1>  
+            <h1 class="fw-bold color-title">Modifica il progetto {{ $project->id }}</h1>  
         </div>
         <div class="col-10 mt-5">
             {{-- Condizione per ciclare gli errori da mostrare --}}
