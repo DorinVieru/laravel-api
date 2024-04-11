@@ -9,7 +9,7 @@
 
         </div>
         <div class="col-12 mt-5">
-            <table class="table table-striped border">
+            <table id="table-types-techs" class="table table-striped border">
                 <thead class="table-dark">
                     <tr>
                         <th>ID</th>
